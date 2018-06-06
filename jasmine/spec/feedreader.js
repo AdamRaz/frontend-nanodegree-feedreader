@@ -73,11 +73,12 @@ $(function() {
           * clicked and does it hide when clicked again.
           */    
             it('menu changes visibility when the menu icon is clicked', function() {
-                // document.addEventListener('click', function () {
-                //     let test = "hello!";
-                //     expect(test).toBe("hello!");
-                });
-
+                let bodyClasses = document.body.classList;
+                let menuIcon = $('.menu-icon-link');
+                menuIcon.click();
+                expect(bodyClasses).not.toContain("menu-hidden");
+                menuIcon.click();
+                expect(bodyClasses).toContain("menu-hidden");
             });
         });
 
@@ -90,9 +91,28 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        describe('Initial Entries', function() {
 
-            it('entries exist within feed when feed load completes', function() {
+        let feedEntry1;
+        let feedEntry2;
+        describe('Initial Entries', function() {
+            beforeEach(function(done) {
+                // executes async code before each test in this test suite scope and uses done to signal completion
+                loadFeed(1, function() {
+                    done()
+                });
+                // calling done in the callback provided for in the loadFeed function... all async functions should really have callbacks?
+                // tried this with just done() without wrapping it in function () {} first... did not work as expected, later code loggin innerHTML did not work
+            });
+
+            it('entries exist within feed when feed load completes', function(done) {
+                let feedEntries = document.querySelector('.feed').innerHTML;
+                feedEntry1 = feedEntries;
+                expect(feedEntries).not.toBe(null);
+                console.log("feedEntries are");
+                console.log(document.querySelector('.feed'));
+                done();
+                console.log(document.querySelector('.feed'));
+                // done used here and passed in as param to signal to jasmine framework that this test relise on async code completion
             });
         });
 
@@ -104,8 +124,23 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         describe('New Feed Selection', function() {
+            beforeEach(function(done) {
+                // executes async code before each test in this test suite scope and uses done to signal completion
+                loadFeed(2, function() {
+                    done()
+                });
+                // calling done in the callback provided for in the loadFeed function... all async functions should really have callbacks?
+                // tried this with just done() without wrapping it in function () {} first... did not work as expected, later code loggin innerHTML did not work
+            });
+            it('content changes on async feed load', function(done) {
+                let feedEntry2 = document.querySelector('.feed').innerHTML;
+                console.log(feedEntry1);
+                console.log(feedEntry2);
 
-            it('content changes on async feed load', function() {
+                expect(feedEntry1).not.toEqual(feedEntry2);
+                
+                done();
+
             });
         });
 }());
