@@ -24,7 +24,7 @@ var allFeeds = [
 ];
 
 /* This function starts up our application. The Google Feed
- * Reader API is loaded asynchonously and will then call this
+ * Reader API is loaded asynchronously and will then call this
  * function when the API is loaded.
  */
 function init() {
@@ -37,7 +37,7 @@ function init() {
  * perform all of the DOM operations required to display
  * feed entries on the page. Feeds are referenced by their
  * index position within the allFeeds array.
- * This function all supports a callback as the second parameter
+ * This function also supports a callback as the second parameter
  * which will be called after everything has run successfully.
  */
  function loadFeed(id, cb) {
