@@ -79,8 +79,9 @@ $(function() {
 
             it('entries exist within feed when feed load completes', function(done) {
                 // AR - passing in 'done' as function parameter and using done() at the end lets jasmine framework know this test relies on asynchronous code
-                let feedEntries = document.querySelector('.feed').innerHTML;
-                expect(feedEntries).not.toBe(null);
+                // AR - using jquery to access elements of class 'entry' that are children of container with class 'feed'
+                let feedChildren = $('.feed .entry');
+                expect(feedChildren.length).toBeGreaterThan(0);
                 done();
             });
         });
@@ -90,15 +91,15 @@ $(function() {
         let feedEntry1;
         let feedEntry2;
             beforeEach(function(done) {
-                // AR - executes async code before each test in this test suite scope and uses done to signal completion
+                // AR - executes async code before each test (in this test suite scope) and uses done to signal completion
+                // AR - using nested callbacks, feed 1 is loaded and within that function's callback feed 2 is loaded. This ensures feed 2 is loaded after the first feed is loaded,
                 loadFeed(1, function() {
                     feedEntry1 = document.querySelector('.feed').innerHTML;
-                    done()
-                });
-                // AR - we execute loadfeed with different id parameter and extract the result from HTML for comparison later
-                loadFeed(2, function() {
-                    feedEntry2 = document.querySelector('.feed').innerHTML;
-                    done()
+                    // AR - we execute loadfeed with different id parameter and extract the result from HTML for comparison later
+                    loadFeed(2, function() {
+                        feedEntry2 = document.querySelector('.feed').innerHTML;
+                        done();
+                    });
                 });
             });
 
