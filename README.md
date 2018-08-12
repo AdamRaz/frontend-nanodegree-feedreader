@@ -12,12 +12,12 @@ clone the project  with `git clone <insert url here>` and open index.html in a b
 * [Jasmine](http://jasmine.github.io/) - testing framework
 
 
-## Why testing?
+## why testing?
 see - http://github.com/udacity/frontend-nanodegree-feedreader
 
 standard of development known as "test-driven development": write tests first, before start development of application. All the tests initially fail and then start writing application code to make these tests pass.
 
-## Also see: 
+## also see: 
 See [Project Rubric](https://review.udacity.com/#!/projects/3442558598/rubric)
 
 1. Udacity JavaScript Testing [course](https://www.udacity.com/course/ud549)
