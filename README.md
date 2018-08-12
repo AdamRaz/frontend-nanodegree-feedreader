@@ -1,4 +1,4 @@
-# Project instructions
+# Jasmine framework based testing project
 
 Using jasmine testing framework to test an RSS feed reader app.
 
