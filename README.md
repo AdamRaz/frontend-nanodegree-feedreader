@@ -1,6 +1,6 @@
 # Project instructions
 
-Using jasmine testing framework to test a feed reader app.
+Using jasmine testing framework to test an RSS feed reader app.
 
 Tests are independent and test function of the app e.g. that entries exist, that feed loading occurs, that elements are hidden when they should be.
 
